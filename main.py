@@ -1,12 +1,9 @@
-from cq_fun import *
+from graia.ariadne.entry import Ariadne, config
+from graia.saya import Saya
+from creart import create
+App = Ariadne(config(2769124385, "INITKEY9N2rdEMQ"))
+s = create(Saya)
 
-text = rev_msg()
-while True:
-    text = rev_msg()
-    print(text)
-    if text['message_type'] == 'group' and text['message'] == 'Yeusint':
-        send_msg({
-            'type': "group",
-            'id': str(text['group_id']),
-            'msg': '滴滴滴！！！'
-        })
+with s.module_context():
+    s.require("mod.group")
+App.launch_blocking()
