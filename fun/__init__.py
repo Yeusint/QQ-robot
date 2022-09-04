@@ -45,7 +45,7 @@ def get_admin_list(group_id: int, member_list: list) -> list:
         data = config["admin"][str(group_id)]
     except KeyError:
         config["admin"][str(group_id)] = []
-        open("res/data.json", "w").write(dumps(str(config)))
+        open("res/data.json", "w").write(dumps(config))
         return ["俺在这个群没有管理员喔~", Image(path="res/a1.png"), 0]
     if not data:
         return ["俺在这个群没有管理员喔~", Image(path="res/a1.png"), 0]
@@ -64,26 +64,70 @@ def get_admin_list(group_id: int, member_list: list) -> list:
     return result
 
 
-def add_admin(group_id: int, member_id: int) -> list:
+def add_admin(group_id: int, member_id: int) -> bool:
     config = loads(open("res/data.json", "r").read())
     try:
+        if member_id in config["admin"][str(group_id)]:
+            return False
         config["admin"][str(group_id)].append(member_id)
-        open("res/data.json", "w").write(dumps(str(config)))
-        return config["admin"][str(group_id)]
+        open("res/data.json", "w").write(dumps(config))
+        return True
     except KeyError:
         config["admin"][str(group_id)] = [member_id]
-        open("res/data.json", "w").write(dumps(str(config)))
-        return config["admin"][str(group_id)]
+        open("res/data.json", "w").write(dumps(config))
+        return True
 
 
-def del_admin(group_id: int, member_id: int) -> list:
+def del_admin(group_id: int, member_id: int) -> int:
     config = loads(open("res/data.json", "r").read())
     try:
-        config["admin"][str(group_id)].remove(member_id)
-        open("res/data.json", "w").write(dumps(str(config)))
-        return config["admin"][str(group_id)]
+        data = config["admin"][str(group_id)]
     except KeyError:
         config["admin"][str(group_id)] = []
         open("res/data.json", "w").write(dumps(str(config)))
-        return ["俺在这个群没有管理员喔~", Image(path="res/a1.png"), 0]
+        return 2
+    if member_id not in data:
+        return 1
+    else:
+        data.remove(member_id)
+        open("res/data.json", "w").write(dumps(config))
+        return 0
 
+
+def is_member(member_list: list, user_id: int) -> bool:
+    id_list = []
+    i = 0
+    while i < len(member_list):
+        id_list.append(member_list[i].id)
+        i += 1
+    if user_id in id_list:
+        return True
+    else:
+        return False
+
+
+def is_admin(group_id: int, user_id: int) -> bool:
+    if user_id in loads(open("res/data.json", "r").read())['admin'][str(group_id)] or user_id == 673457979:
+        return True
+    else:
+        return False
+
+
+def add_node(node: str) -> bool:
+    if node[0:5] == "http:" or node[0:6] == "https:" or node[-1] == "/" or node.find(".") == -1:
+        return False
+    config = loads(open("res/data.json", "r").read())
+    config['node'].append(node)
+    open("res/data.json", "w").write(dumps(config))
+    return True
+
+
+def del_node(node: str) -> bool:
+    config = loads(open("res/data.json", "r").read())
+    if len(config['node']) == 1:
+        return False
+    elif node in config['node']:
+        config['node'].remove(node)
+        return True
+    else:
+        return False
