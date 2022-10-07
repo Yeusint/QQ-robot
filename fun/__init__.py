@@ -1,8 +1,10 @@
+from typing import List
+
 from fun.ping import Ping
 from json import loads, dumps
 from threading import Thread
 from time import sleep
-from graia.ariadne.entry import Image
+from graia.ariadne.entry import Image, Group
 
 
 speed_result = {}
@@ -94,6 +96,13 @@ def del_admin(group_id: int, member_id: int) -> int:
         return 0
 
 
+def is_group(group_list: List[Group], group_id: int) -> bool:
+    for i in range(len(group_list)):
+        if group_list[i].id == group_id:
+            return True
+    return False
+
+
 def is_member(member_list: list, user_id: int) -> bool:
     id_list = []
     i = 0
@@ -128,6 +137,7 @@ def del_node(node: str) -> bool:
         return False
     elif node in config['node']:
         config['node'].remove(node)
+        open("res/data.json", "w").write(dumps(config))
         return True
     else:
         return False
