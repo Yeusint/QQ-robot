@@ -9,7 +9,7 @@ a = Channel.current()
 @a.use(ListenerSchema(listening_events=[GroupMessage]))
 async def a(app: Ariadne, message: MessageChain, mem: Member, group: Group):
     try:
-        if message.display[0:5] == "添加管理员" and mem.id == 673457979:
+        if message.display[:5] == "添加管理员" and mem.id == 673457979:
             m_list = await app.get_member_list(group.id)
             if message.display[5] == '@' and message.display[6:].rstrip().isdigit() is True:
                 if add_admin(group.id, int(message.display[6:])):
@@ -56,7 +56,7 @@ async def a(app: Ariadne, message: MessageChain, mem: Member, group: Group):
                                            )
             else:
                 pass
-        elif message.display[0:5] == "删除管理员" and mem.id == 673457979:
+        elif message.display[:5] == "删除管理员" and mem.id == 673457979:
             if message.display[5] == '@' and message.display[6:].rstrip().isdigit() is True:
                 cache = del_admin(group.id, int(message.display[6:]))
                 if cache == 0:
@@ -148,6 +148,7 @@ async def a(app: Ariadne, message: MessageChain, mem: Member, group: Group):
                     ),
                     Image(path="res/a3.jpg")
                 ))
+
     except AccountMuted:
         await app.send_friend_message(673457979, MessageChain(
             "哦豁，被禁言了",

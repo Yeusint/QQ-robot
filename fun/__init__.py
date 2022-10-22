@@ -1,9 +1,11 @@
+from hashlib import md5
 from typing import List
-
 from fun.ping import Ping
 from json import loads, dumps
 from threading import Thread
 from time import sleep
+from requests import get
+from random import randint
 from graia.ariadne.entry import Image, Group
 
 
@@ -141,3 +143,33 @@ def del_node(node: str) -> bool:
         return True
     else:
         return False
+
+
+def get_md5(str_):
+    parm_str = ''
+    if isinstance(str_, str):
+        parm_str = str_.encode("utf-8")
+    m = md5()
+    m.update(parm_str)
+    return m.hexdigest()
+
+
+def translate(text, language):
+    if language not in loads(open("res/data.json", 'r').read())["language"].split(','):
+        return None
+    else:
+        from_ = 'auto'
+        to = language
+        app_id = '20220312001121848'
+        key = '3ub5oSCnDyVJWDteblZW'
+        salt = str(randint(200000, 900000))
+        url = "https://api.fanyi.baidu.com/api/trans/vip/translate?q=" + text + \
+              "&from=" + from_ + \
+              "&to=" + to + \
+              "&appid=" + app_id + \
+              "&salt=" + salt + \
+              "&sign=" + str(get_md5(app_id + text + salt + key))
+        html = get(url)
+        json_text = str(dict(loads(html.text))['trans_result'])
+        result = json_text[json_text.index("dst") + 7:-3]
+        return result

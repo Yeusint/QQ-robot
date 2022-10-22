@@ -1,2 +1,4 @@
-a = [1, 2, 3]
-print(len(a))
+from fun import translate
+a = input("待翻译:")
+b = input("语种:")
+print(translate(a, b))

@@ -7,5 +7,5 @@ with s.module_context():
     s.require("mod.gnc")
     s.require("mod.gsi")
     s.require("mod.recall")
-    s.require("mod.fri")
+    s.require("mod.cgc")
 App.launch_blocking()

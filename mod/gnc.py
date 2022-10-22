@@ -15,13 +15,12 @@ from graia.saya import Channel
 from graia.saya.builtins.broadcast.schema import ListenerSchema
 from fun import get_speed, get_speed_result, get_admin_list, is_admin
 from graiax import silkcoder
-from random import randint
 from json import loads, dumps
 c = Channel.current()
 
 
 @c.use(ListenerSchema(listening_events=[GroupMessage]))
-async def c(app: Ariadne, group: Group, mem: Member, message: MessageChain, s: Source):
+async def c(app: Ariadne, group: Group, mem: Member, message: MessageChain):
     try:
         if message.display == "a":
             await app.send_message(group,MessageChain(Image(url="https://q.qlogo.cn/g?b=qq&nk=" + str(mem.id) + "&s=0")))
@@ -47,6 +46,18 @@ async def c(app: Ariadne, group: Group, mem: Member, message: MessageChain, s: S
                              Face(name='汪汪')
                          ]
                 await app.send_message(group, MessageChain(result))
+        elif message.display == "获取群列表":
+            _list = await app.get_group_list()
+            result = ''
+            for i in range(len(_list)):result += _list[i].name + '(' + str(_list[i].id) + ')\n'
+            await app.send_message(group, MessageChain(
+                At(mem.id),
+                "获取成功~\n------------------\n",
+                result,
+                '---------------\n列出完毕~',
+                Face(name='花朵脸'),
+                Image(path="res/a2.png")
+            ))
         elif message.display == 'cs':
             v = await silkcoder.async_encode(
                 open("F:\\Yeuisnt\\mirai-robot\\res\\v.flac", 'rb').read(),
@@ -70,7 +81,6 @@ async def c(app: Ariadne, group: Group, mem: Member, message: MessageChain, s: S
                 cache['friend_data'].append(g[i].id)
             open("res/data.json", "w").write(dumps(cache))
             await app.send_message(group, MessageChain("同步完成~\n一共", str(len(cache['group_data'])), "个群\n拥有", str(len(cache['friend_data'])), "个好友"))
-        elif message.display == "ch":await app.recall_message(s, target=group)
     except AccountMuted:
         await app.send_friend_message(673457979, MessageChain(
             "哦豁，被禁言了",

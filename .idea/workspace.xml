@@ -5,23 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eefc5c7f-2ede-47eb-ab68-7c1920ca1bca" name="Changes" comment="change">
-      <change afterPath="$PROJECT_DIR$/mod/cgc.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mod/fri.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mod/recall.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/a7.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/v.flac" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/QQ-robot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/QQ-robot.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_10_6_13_07_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_10_6_13_07__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cs.py" beforeDir="false" afterPath="$PROJECT_DIR$/cs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fun/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/fun/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/cgc.py" beforeDir="false" afterPath="$PROJECT_DIR$/mod/cgc.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mod/gnc.py" beforeDir="false" afterPath="$PROJECT_DIR$/mod/gnc.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mod/gsi.py" beforeDir="false" afterPath="$PROJECT_DIR$/mod/gsi.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/res/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/data.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/v.mp3" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,12 +48,12 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/res" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../QQ-robot/event.py" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="terminal" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -70,7 +63,7 @@
       <recent name="F:\Yeuisnt\mirai-robot\res" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.cs">
+  <component name="RunManager" selected="Python.main">
     <configuration name="__init__" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="QQ-robot" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -251,8 +244,18 @@
       <option name="project" value="LOCAL" />
       <updated>1661763644001</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="change">
+      <created>1665132161123</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1665132161123</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
+  </component>
+  <component name="TerminalProjectNonSharedOptionsProvider">
+    <option name="startingDirectory" value="D:\Downloads\mirai" />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
