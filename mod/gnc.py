@@ -94,5 +94,4 @@ async def c(app: Ariadne, group: Group, mem: Member, message: MessageChain):
             "]",
             mem.name
         ))
-    except PermissionError:
-        await app.send_message(group, MessageChain("嘤嘤嘤,俺没权限~", Face(name="doge"), Image(path="res/a7.gif")))
+    except PermissionError:await app.send_message(group, MessageChain("嘤嘤嘤,俺没权限~", Face(name="doge"), Image(path="res/a7.gif")))

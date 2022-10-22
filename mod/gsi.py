@@ -1,4 +1,4 @@
-from graia.ariadne.entry import Ariadne, MessageChain, Member, At, Image, GroupMessage, Group, Plain, Face, Friend
+from graia.ariadne.entry import Ariadne, MessageChain, Member, At, Image, GroupMessage, Group, Plain, Face
 from graia.ariadne.exception import AccountMuted
 from graia.saya import Channel
 from graia.saya.builtins.broadcast.schema import ListenerSchema
@@ -148,7 +148,19 @@ async def a(app: Ariadne, message: MessageChain, mem: Member, group: Group):
                     ),
                     Image(path="res/a3.jpg")
                 ))
-
+        elif message.display[:2] == "禁言" and is_admin(group.id, mem.id):
+            if message.display[1] == '@' and message.display[2:].rstrip().isdigit() is True:
+                await app.mute_member(group, int(message.display[3:].rstrip()))
+            elif message.display[2:].isdigit() is True:
+                if is_member(await app.get_member_list(group.id), int(message.display[5:])) is True:
+                    pass
+                else:
+                    await app.send_message(group, MessageChain(
+                        At(mem.id),
+                        Plain("错误：无此成员"),
+                        Face(name="doge"),
+                        Image(path="res/a3.jpg")
+                    ))
     except AccountMuted:
         await app.send_friend_message(673457979, MessageChain(
             "哦豁，被禁言了",
@@ -162,3 +174,5 @@ async def a(app: Ariadne, message: MessageChain, mem: Member, group: Group):
             "]",
             mem.name
         ))
+    except PermissionError:
+        await app.send_message(group, MessageChain("嘤嘤嘤,俺没权限~", Face(name="doge"), Image(path="res/a7.gif")))
