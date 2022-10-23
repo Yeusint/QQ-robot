@@ -1,22 +1,26 @@
 def TimeDate(times: int):
-    H = 0  # 96
-    M = 0
-    i = 0
-    for i in range(999999):
-        if times < 60:
-            break
-        else:
-            times -= 60
-            H+=1
-    for i in range(9999999):
-        if H<60:
-            break
-        else:
-            M+=1
-            H -= 60
-    while i == times:
-        i += 1
-
-    strs = "%d" %M +"小时" + "%.f"%H+"分钟"+ str(times)+"秒"
-    print(strs)
-TimeDate(int(input()))
+    h = 0 #hour
+    m = 0 #minute
+    while times >= 60:
+        times-=60
+        m+=1
+        if m == 60:
+            m-=60
+            h+=1
+    if h == 0 and m == 0:
+        return "%d秒" %times
+    elif times == 0:
+        if h == 0 and m != 0:
+            return "%d分" % m
+        elif h != 0 and m == 0:
+            return "%d时" % h
+        elif h != 0 and m != 0:
+            return "%d时%d分" % (h, m)
+    else:
+        if h == 0 and m != 0:
+            return "%d分%d秒" % (m, times)
+        elif h != 0 and m == 0:
+            return "%d时%d秒" % (h, times)
+        elif h != 0 and m != 0:
+            return "%d时%d分%d秒" % (h, m, times)
+print(TimeDate(int(input())))

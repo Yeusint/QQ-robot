@@ -149,8 +149,10 @@ async def a(app: Ariadne, message: MessageChain, mem: Member, group: Group):
                     Image(path="res/a3.jpg")
                 ))
         elif message.display[:2] == "禁言" and is_admin(group.id, mem.id):
-            if message.display[1] == '@' and message.display[2:].rstrip().isdigit() is True:
-                await app.mute_member(group, int(message.display[3:].rstrip()))
+            if message.display[2] == '@' and\
+                    message.display[3:message.display.find(' ')].rstrip().isdigit() and\
+                    message.display[message.display.find(' ')+1:].isdigit():
+                await app.mute_member(group, int(message.display[3:message.display.find(' ')].rstrip()), int(message.display[message.display.find(' ')+1:]))
             elif message.display[2:].isdigit() is True:
                 if is_member(await app.get_member_list(group.id), int(message.display[5:])) is True:
                     pass
@@ -174,5 +176,4 @@ async def a(app: Ariadne, message: MessageChain, mem: Member, group: Group):
             "]",
             mem.name
         ))
-    except PermissionError:
-        await app.send_message(group, MessageChain("嘤嘤嘤,俺没权限~", Face(name="doge"), Image(path="res/a7.gif")))
+    except PermissionError:await app.send_message(group, MessageChain("嘤嘤嘤,俺没权限~", Face(name="doge"), Image(path="res/a7.gif")))
