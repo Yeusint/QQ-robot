@@ -2,7 +2,7 @@ from graia.ariadne.entry import Ariadne, MessageChain, Member, At, Image, GroupM
 from graia.ariadne.exception import AccountMuted
 from graia.saya import Channel
 from graia.saya.builtins.broadcast.schema import ListenerSchema
-from fun import add_admin, is_member, del_admin, is_admin, add_node, del_node
+from fun import add_admin, is_member, del_admin, is_admin, add_node, del_node, mute_time
 a = Channel.current()
 
 
@@ -149,13 +149,27 @@ async def a(app: Ariadne, message: MessageChain, mem: Member, group: Group):
                     Image(path="res/a3.jpg")
                 ))
         elif message.display[:2] == "禁言" and is_admin(group.id, mem.id):
-            if message.display[2] == '@' and\
-                    message.display[3:message.display.find(' ')].rstrip().isdigit() and\
-                    message.display[message.display.find(' ')+1:].isdigit():
+            if message.display[2] == '@' and message.display[3:message.display.find(' ')].rstrip().isdigit() and message.display[message.display.find(' ')+1:].isdigit():
                 await app.mute_member(group, int(message.display[3:message.display.find(' ')].rstrip()), int(message.display[message.display.find(' ')+1:]))
-            elif message.display[2:].isdigit() is True:
-                if is_member(await app.get_member_list(group.id), int(message.display[5:])) is True:
-                    pass
+                await app.send_message(group, MessageChain(
+                    "成功禁言",
+                    At(int(message.display[3:message.display.find(' ')].rstrip())),
+                    "共",
+                    mute_time(int(message.display[message.display.find(' ')+1:])),
+                    "~\n",
+                    Image(path="res/a2.png")
+                ))
+            elif message.display[2:message.display.find(' ')].isdigit() is True:
+                if is_member(await app.get_member_list(group.id), int(message.display[2:message.display.find(' ')])) is True:
+                    await app.mute_member(group, int(message.display[2:message.display.find(' ')].rstrip()), int(message.display[message.display.find(' ')+1:]))
+                    await app.send_message(group, MessageChain(
+                        "成功禁言",
+                        message.display[2:message.display.find(' ')].rstrip(),
+                        "共",
+                        mute_time(int(message.display[message.display.find(' ')+1:])),
+                        "~\n",
+                        Image(path="res/a2.png")
+                    ))
                 else:
                     await app.send_message(group, MessageChain(
                         At(mem.id),

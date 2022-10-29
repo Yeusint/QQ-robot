@@ -118,9 +118,14 @@ def is_member(member_list: list, user_id: int) -> bool:
 
 
 def is_admin(group_id: int, user_id: int) -> bool:
-    if user_id in loads(open("res/data.json", "r").read())['admin'][str(group_id)] or user_id == 673457979:
+    if user_id == 673457979:
+        return True
+    elif str(group_id) in loads(open("res/data.json", "r").read())['admin'][str(group_id)] and user_id in loads(open("res/data.json", "r").read())['admin'][str(group_id)]:
         return True
     else:
+        config = loads(open("res/data.json", "r").read())
+        config["admin"][str(group_id)] = []
+        open("res/data.json", "w").write(dumps(config))
         return False
 
 
@@ -175,7 +180,7 @@ def translate(text, language):
         return result
 
 
-def cpk(times: int) -> str:
+def mute_time(times: int) -> str:
     h = 0 #hour
     m = 0 #minute
     while times >= 60:

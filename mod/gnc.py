@@ -8,14 +8,12 @@ from graia.ariadne.entry import (
     At,
     Face,
     Voice,
-    Source
 )
 from graia.ariadne.exception import AccountMuted
 from graia.saya import Channel
 from graia.saya.builtins.broadcast.schema import ListenerSchema
 from fun import get_speed, get_speed_result, get_admin_list, is_admin
 from graiax import silkcoder
-from json import loads, dumps
 c = Channel.current()
 
 
@@ -63,24 +61,6 @@ async def c(app: Ariadne, group: Group, mem: Member, message: MessageChain):
                 open("F:\\Yeuisnt\\mirai-robot\\res\\v.flac", 'rb').read(),
                 audio_format='flac')
             await app.send_message(group, MessageChain(Voice(data_bytes=v, length=320)))
-        elif message.display == "c-" and is_admin(group.id, mem.id):
-            await app.send_message(group, MessageChain("开始同步~"))
-            r = open("res/data.json", "r")
-            cache = loads(r.read())
-            r.close()
-            g = await app.get_group_list()
-            cache['group_data'] = {}
-            cache['friend_data'] = []
-            for i in range(len(g)):
-                m = await app.get_member_list(g[i])
-                cache['group_data'][g[i].id] = []
-                for i_ in range(len(m)):
-                    cache['group_data'][g[i].id].append(m[i_].id)
-            g = await app.get_friend_list()
-            for i in range(len(g)):
-                cache['friend_data'].append(g[i].id)
-            open("res/data.json", "w").write(dumps(cache))
-            await app.send_message(group, MessageChain("同步完成~\n一共", str(len(cache['group_data'])), "个群\n拥有", str(len(cache['friend_data'])), "个好友"))
     except AccountMuted:
         await app.send_friend_message(673457979, MessageChain(
             "哦豁，被禁言了",
