@@ -177,6 +177,19 @@ async def a(app: Ariadne, message: MessageChain, mem: Member, group: Group):
                         Face(name="doge"),
                         Image(path="res/a3.jpg")
                     ))
+        elif message.display[:2] == "解禁" and is_admin(group.id, mem.id):
+            if message.display[2] == '@' and message.display[3:].rstrip().isdigit():
+                await app.unmute_member(group, int(message.display[3:].rstrip()))
+            elif message.display[2:].isdigit() is True:
+                if is_member(await app.get_member_list(group.id), int(message.display[2:])) is True:
+                    await app.unmute_member(group, int(message.display[2:]))
+            else:
+                await app.send_message(group, MessageChain(
+                    At(mem.id),
+                    Plain("错误：无此成员"),
+                    Face(name="doge"),
+                    Image(path="res/a3.jpg")
+                ))
     except AccountMuted:
         await app.send_friend_message(673457979, MessageChain(
             "哦豁，被禁言了",

@@ -118,11 +118,12 @@ def is_member(member_list: list, user_id: int) -> bool:
 
 
 def is_admin(group_id: int, user_id: int) -> bool:
-    if user_id == 673457979:
-        return True
-    elif str(group_id) in loads(open("res/data.json", "r").read())['admin'][str(group_id)] and user_id in loads(open("res/data.json", "r").read())['admin'][str(group_id)]:
-        return True
-    else:
+    try:
+        if user_id == 673457979 or user_id in loads(open("res/data.json", "r").read())['admin'][str(group_id)]:
+            return True
+        else:
+            return False
+    except KeyError:
         config = loads(open("res/data.json", "r").read())
         config["admin"][str(group_id)] = []
         open("res/data.json", "w").write(dumps(config))
@@ -175,33 +176,52 @@ def translate(text, language):
               "&salt=" + salt + \
               "&sign=" + str(get_md5(app_id + text + salt + key))
         html = get(url)
-        json_text = str(dict(loads(html.text))['trans_result'])
-        result = json_text[json_text.index("dst") + 7:-3]
+        result = loads(html.text)["trans_result"][0]["dst"]
         return result
 
 
 def mute_time(times: int) -> str:
     h = 0 #hour
     m = 0 #minute
+    d = 0 #day
     while times >= 60:
         times-=60
         m+=1
         if m == 60:
             m-=60
             h+=1
-    if h == 0 and m == 0:
+        if h == 24:
+            h -= 24
+            d += 1
+    if h == 0 and m == 0 and d == 0:
         return "%d秒" %times
     elif times == 0:
-        if h == 0 and m != 0:
+        if h == 0 and m != 0 and d == 0:
             return "%d分" % m
-        elif h != 0 and m == 0:
+        elif h != 0 and m == 0 and d == 0:
             return "%d时" % h
-        elif h != 0 and m != 0:
-            return "%d时%d分" % (h, m)
+        elif h == 0 and m == 0 and d != 0:
+            return "%d天" % d
+        elif h != 0 and m != 0 and d == 0:
+            return "%d时%d分" % (h,m)
+        elif h == 0 and m != 0 and d != 0:
+            return "%d天%d分" % (d,m)
+        elif h != 0 and m == 0 and d != 0:
+            return "%d天%d时" % (d,m)
+        elif h != 0 and m != 0 and d != 0:
+            return "%d天%d时%d分" % (d,h,m)
     else:
-        if h == 0 and m != 0:
+        if h == 0 and m != 0 and d == 0:
             return "%d分%d秒" % (m, times)
-        elif h != 0 and m == 0:
+        elif h != 0 and m == 0 and d == 0:
             return "%d时%d秒" % (h, times)
-        elif h != 0 and m != 0:
+        elif h == 0 and m == 0 and d != 0:
+            return "%d天%d秒" % (d,times)
+        elif h != 0 and m != 0 and d == 0:
             return "%d时%d分%d秒" % (h, m, times)
+        elif h == 0 and m != 0 and d != 0:
+            return "%d天%d分%d秒" % (d,m, times)
+        elif h != 0 and m == 0 and d != 0:
+            return "%d天%d时%d秒" % (d,h, times)
+        elif h != 0 and m != 0 and d != 0:
+            return "%d天%d时%d分%d秒" % (d,h, m, times)

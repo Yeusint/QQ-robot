@@ -8,4 +8,5 @@ with s.module_context():
     s.require("mod.gsi")
     s.require("mod.recall")
     s.require("mod.cgc")
+    s.require("mod.tran")
 App.launch_blocking()

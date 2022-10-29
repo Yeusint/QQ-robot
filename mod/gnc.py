@@ -7,13 +7,12 @@ from graia.ariadne.entry import (
     Image,
     At,
     Face,
-    Voice,
+    MultimediaElement
 )
 from graia.ariadne.exception import AccountMuted
 from graia.saya import Channel
 from graia.saya.builtins.broadcast.schema import ListenerSchema
 from fun import get_speed, get_speed_result, get_admin_list, is_admin
-from graiax import silkcoder
 c = Channel.current()
 
 
@@ -57,10 +56,17 @@ async def c(app: Ariadne, group: Group, mem: Member, message: MessageChain):
                 Image(path="res/a2.png")
             ))
         elif message.display == 'cs':
-            v = await silkcoder.async_encode(
-                open("F:\\Yeuisnt\\mirai-robot\\res\\v.flac", 'rb').read(),
-                audio_format='flac')
-            await app.send_message(group, MessageChain(Voice(data_bytes=v, length=320)))
+            await app.send_message(group, MessageChain(MultimediaElement(path="res/y.mp4")))
+        elif message.display == '翻译':
+            await app.send_message(group, MessageChain(
+                "[翻译]\n"
+                "---------------------------\n"
+                "翻译+目标语种代码[空格]需要翻译的文本\n"
+                "---------------------------\n"
+                "例：翻译zh apple\n"
+                "语种代码参考↓\n",
+                Image(path="res/lan.png")
+            ))
     except AccountMuted:
         await app.send_friend_message(673457979, MessageChain(
             "哦豁，被禁言了",
