@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="eefc5c7f-2ede-47eb-ab68-7c1920ca1bca" name="Changes" comment="change">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cs.py" beforeDir="false" afterPath="$PROJECT_DIR$/cs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fun/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/fun/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/gnc.py" beforeDir="false" afterPath="$PROJECT_DIR$/mod/gnc.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mod/gsi.py" beforeDir="false" afterPath="$PROJECT_DIR$/mod/gsi.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/res/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/data.json" afterDir="false" />
     </list>
@@ -273,7 +270,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666513852125</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="change">
+      <created>1667023695062</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1667023695062</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TerminalProjectNonSharedOptionsProvider">
