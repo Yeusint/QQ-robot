@@ -27,7 +27,8 @@ def get_speed():
         x = Thread(target=thread, args=(i, node))
         x.start()
         i += 1
-    sleep(2.6)
+    while len(node) > len(speed_result):
+        pass
     return speed_result
 
 
@@ -36,11 +37,13 @@ def get_speed_result(result_list: list):
     node = config["node"]
     if len(node) == len(result_list):
         i = 0
-        result = "共设置" + str(len(node)) + "个节点\n"
+        result = "\n--------------------\n共设置" + str(len(node)) + "个节点\n"
         while i < len(node):
             result += node[i] + "|" + result_list[node[i]] + "\n"
             i += 1
-        return result
+    else:
+        result = " 获取失败,出现错误..."
+    return result
 
 
 def get_admin_list(group_id: int, member_list: list) -> list:

@@ -22,7 +22,7 @@ async def c(app: Ariadne, group: Group, mem: Member, message: MessageChain):
         if message.display == "a":
             await app.send_message(group,MessageChain(Image(url="https://q.qlogo.cn/g?b=qq&nk=" + str(mem.id) + "&s=0")))
         elif message.display == "查看机器网络状态" and is_admin(group.id, mem.id):
-            await app.send_message(group,MessageChain(At(mem), "\n--------------------\n", get_speed_result(get_speed())))
+            await app.send_message(group,MessageChain(At(mem), get_speed_result(get_speed())))
         elif message.display == "获取管理员列表":
             m_list = await app.get_member_list(group.id)
             admin_list = get_admin_list(group.id, m_list)
