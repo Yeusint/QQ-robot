@@ -22,7 +22,12 @@ b = Channel.current()
 @a.use(ListenerSchema(listening_events=[GroupMessage], decorators=[DetectPrefix("点歌")]))
 async def a(app: Ariadne, group: Group, mem: Member, msg: MessageChain = DetectPrefix("点歌")):
     if msg.display == '':
-        await app.send_message(group, MessageChain("🐔你太美~", Voice(path="res/j.amr")))
+        await app.send_message(group, MessageChain(
+            "[点歌]\n----------------------\n",
+            "目前使用语音方式发送,后续更新卡片方式发送喔~\n",
+            '出现列表后直接发送数字即可等待收听啦~\n格式：点歌[歌名]\n------------------------\n',
+            '目前普通音乐使用酷狗渠道播放,VIP歌曲使用QQ音乐渠道播放'
+        ))
     else:
         data = loads(get("http://mobilecdn.kugou.com/api/v3/search/song?format=json&keyword="+msg+"&page=1&pagesize=20&showtype=1"
                          ).text)["data"]["info"]
@@ -43,12 +48,22 @@ async def a(app: Ariadne, group: Group, mem: Member, msg: MessageChain = DetectP
 
 @b.use(ListenerSchema(listening_events=[GroupMessage]))
 async def b(app: Ariadne, g: Group, mem: Member, msg: MessageChain):
-    if msg.display.isdigit():
+    if mem.id in song_cache and msg.display.isdigit():
         num = int(msg.display)
-        if 10 >= num >= 1 and mem.id in song_cache:
-            await app.send_message(g, MessageChain(Voice(data_bytes=encode(
-                get(
-                    loads(get("https://m.kugou.com/app/i/getSongInfo.php?cmd=playInfo&hash="+song_cache[mem.id][num-1]["hash"]
+        if 10 >= num >= 1:
+            url = loads(get("https://m.kugou.com/app/i/getSongInfo.php?cmd=playInfo&hash="+song_cache[mem.id][num-1]["hash"]
                     ).text)['url']
-                ).content
-            ))))
+            if url == "":
+                await app.send_message(g, MessageChain("此为VIP歌曲,将使用QQ音乐渠道~\n请稍后~"))
+                await app.send_message(g, MessageChain(Voice(data_bytes=encode(get(
+                    loads(get(
+                        "http://ovooa.com/API/QQ_Music/?Cookie=&msg="+
+                        song_cache[mem.id][num-1]["singername"] +
+                        "-" +
+                        song_cache[mem.id][num-1]["songname"] +
+                        "&n=1&br=1"
+                    ).text)['data']["music"]
+                ).content))))
+            else:
+                await app.send_message(g, MessageChain("请稍后~"))
+                await app.send_message(g, MessageChain(Voice(data_bytes=encode(get(url).content))))
