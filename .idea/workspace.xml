@@ -4,17 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eefc5c7f-2ede-47eb-ab68-7c1920ca1bca" name="Changes" comment="change">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mod/tran.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/lan.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/y.mp4" afterDir="false" />
+    <list default="true" id="f5c86858-3124-4447-b709-a8e33c179a63" name="Changes" comment="update">
+      <change afterPath="$PROJECT_DIR$/fun/cache_var.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cs.py" beforeDir="false" afterPath="$PROJECT_DIR$/cs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fun/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/fun/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/fri.py" beforeDir="false" afterPath="$PROJECT_DIR$/mod/fri.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mod/gnc.py" beforeDir="false" afterPath="$PROJECT_DIR$/mod/gnc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/music.py" beforeDir="false" afterPath="$PROJECT_DIR$/mod/music.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/v.flac" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/y.mp4" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +35,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2E0hgrAhsZBAMtLB9If03iQrXr8" />
   <component name="ProjectLevelVcsManager">
@@ -51,7 +51,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/res" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -61,12 +61,12 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\Yeuisnt\mirai-robot" />
       <recent name="F:\Yeuisnt\mirai-robot\res" />
+      <recent name="F:\Yeuisnt\mirai-robot" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="F:\Yeuisnt\mirai-robot" />
       <recent name="F:\Yeuisnt\mirai-robot\res" />
+      <recent name="F:\Yeuisnt\mirai-robot" />
     </key>
   </component>
   <component name="RunManager" selected="Python.main">
@@ -292,7 +292,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667026360515</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="update">
+      <created>1672572054988</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1672572054988</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TerminalProjectNonSharedOptionsProvider">
@@ -314,6 +321,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="change" />
-    <option name="LAST_COMMIT_MESSAGE" value="change" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
 </project>

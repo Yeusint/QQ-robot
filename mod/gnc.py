@@ -7,12 +7,14 @@ from graia.ariadne.entry import (
     Image,
     At,
     Face,
-    MultimediaElement
+    Voice
 )
 from graia.ariadne.exception import AccountMuted
 from graia.saya import Channel
 from graia.saya.builtins.broadcast.schema import ListenerSchema
-from fun import get_speed, get_speed_result, get_admin_list, is_admin
+from fun.cache_var import start_time
+from time import time, localtime, strftime
+from fun import get_speed, get_speed_result, get_admin_list, is_admin, mute_time
 c = Channel.current()
 
 
@@ -55,8 +57,18 @@ async def c(app: Ariadne, group: Group, mem: Member, message: MessageChain):
                 Face(name='花朵脸'),
                 Image(path="res/a2.png")
             ))
+        elif message.display == "运行时间":
+            await app.send_message(group, MessageChain(
+                At(mem),
+                "获取成功~\n启动时间:",
+                strftime("%m月%d日%H时%M分%S秒", localtime(start_time)),
+                "\n当前时间:",
+                strftime("%m月%d日%H时%M分%S秒"),
+                "\n已启动时间:",
+                mute_time(int(time()-start_time))
+            ))
         elif message.display == 'cs':
-            await app.send_message(group, MessageChain(MultimediaElement(path="res/y.mp4")))
+            await app.send_message(group, MessageChain(Voice(path="res/j.amr")))
         elif message.display == '翻译':
             await app.send_message(group, MessageChain(
                 "[翻译]\n"

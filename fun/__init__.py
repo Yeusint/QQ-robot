@@ -3,7 +3,6 @@ from typing import List
 from fun.ping import Ping
 from json import loads, dumps
 from threading import Thread
-from time import sleep
 from requests import get
 from random import randint
 from graia.ariadne.entry import Image, Group
