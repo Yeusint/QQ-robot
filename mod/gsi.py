@@ -202,6 +202,13 @@ async def a(app: Ariadne, message: MessageChain, mem: Member, group: Group):
                     Face(name="doge"),
                     Image(path="res/a3.jpg")
                 ))
+        elif message.display[:2] == "踢出" and is_admin(group.id, mem.id):
+            if message.display[2] == '@' and message.display[3:].rstrip().isdigit():
+                await app.kick_member(group, int(message.display[3:].rstrip()))
+                await app.send_message(group, MessageChain("已将这位兄弟送走～", Face(name="再见")))
+            elif message.display[2] == '@' and message.display[3:].split(" ")[0].isdigit() and len(message.display[3:].split(" ")[0]) > 1:
+                await app.kick_member(group, int(message.display[3:message.display.find(' ')].rstrip()), message.display[message.display.find(' ')+1:])
+                await app.send_message(group, MessageChain("已将这位兄弟送走～", Face(name="再见")))
     except AccountMuted:
         await app.send_friend_message(673457979, MessageChain(
             "哦豁，被禁言了",
