@@ -1,4 +1,5 @@
 from requests import get
+from graia.ariadne.message.element import MusicShareKind
 from graia.ariadne.entry import (
     Ariadne,
     GroupMessage,
@@ -7,14 +8,13 @@ from graia.ariadne.entry import (
     Member,
     Face,
     DetectPrefix,
-    Voice,
-    At
+    At,
+    MusicShare
 )
 from graia.saya import Channel
 from graia.saya.builtins.broadcast import ListenerSchema
 from json import loads
 from fun.cache_var import song_cache
-from graiax.silkcoder import encode
 a = Channel.current()
 b = Channel.current()
 
@@ -34,7 +34,7 @@ async def a(app: Ariadne, group: Group, mem: Member, msg: MessageChain = DetectP
         i=0
         r=''
         while i != 10:
-            r+=str(i+1) + " " + data[i]["singername"] + '-' + data[i]["songname"] + "\n"
+            r+=str(i+1) + " " + data[i]["filename"] + "\n"
             i+=1
         song_cache[mem.id] = data
         await app.send_message(group, MessageChain(
@@ -50,20 +50,35 @@ async def a(app: Ariadne, group: Group, mem: Member, msg: MessageChain = DetectP
 async def b(app: Ariadne, g: Group, mem: Member, msg: MessageChain):
     if mem.id in song_cache and msg.display.isdigit():
         num = int(msg.display)
+        data = song_cache[mem.id]
+        song_cache.pop(mem.id)
         if 10 >= num >= 1:
-            url = loads(get("https://m.kugou.com/app/i/getSongInfo.php?cmd=playInfo&hash="+song_cache[mem.id][num-1]["hash"]
-                    ).text)['url']
-            if url == "":
-                await app.send_message(g, MessageChain("此为VIP歌曲,将使用QQ音乐渠道~\n请稍后~"))
-                await app.send_message(g, MessageChain(Voice(data_bytes=encode(get(
-                    loads(get(
-                        "http://ovooa.com/API/QQ_Music/?Cookie=&msg="+
-                        song_cache[mem.id][num-1]["singername"] +
+            url = loads(get("https://m.kugou.com/app/i/getSongInfo.php?cmd=playInfo&hash="+data[num-1]["hash"]
+                    ).text)
+            if url['url'] == "":
+                m = loads(get(
+                        "http://ovooa.com/API/QQ_Music/?Cookie=&msg=" +
+                        data[num - 1]["singername"] +
                         "-" +
-                        song_cache[mem.id][num-1]["songname"] +
+                        data[num - 1]["songname"] +
                         "&n=1&br=1"
-                    ).text)['data']["music"]
-                ).content))))
+                    ).text)['data']
+                await app.send_message(g, MessageChain(MusicShare(
+                    MusicShareKind.QQMusic,
+                    data[num-1]["filename"],
+                    "-",
+                    m['url'],
+                    m["picture"],
+                    m["music"],
+                    '此为VIP歌曲,使用QQ音乐渠道~'
+                )))
             else:
-                await app.send_message(g, MessageChain("请稍后~"))
-                await app.send_message(g, MessageChain(Voice(data_bytes=encode(get(url).content))))
+                await app.send_message(g, MessageChain(MusicShare(
+                    MusicShareKind.KugouMusic,
+                    data[num-1]["filename"],
+                    "-",
+                    url['url'],
+                    url["album_img"].replace("{size}", '100'),
+                    url['url'],
+                    '-'
+                )))
