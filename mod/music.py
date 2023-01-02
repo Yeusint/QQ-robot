@@ -65,7 +65,7 @@ async def b(app: Ariadne, g: Group, mem: Member, msg: MessageChain):
                     ).text)['data']
                 await app.send_message(g, MessageChain(MusicShare(
                     MusicShareKind.QQMusic,
-                    data[num-1]["filename"],
+                    data[num-1]["songname"],
                     "-",
                     m['url'],
                     m["picture"],
@@ -75,7 +75,7 @@ async def b(app: Ariadne, g: Group, mem: Member, msg: MessageChain):
             else:
                 await app.send_message(g, MessageChain(MusicShare(
                     MusicShareKind.KugouMusic,
-                    data[num-1]["filename"],
+                    data[num-1]["songname"],
                     "-",
                     url['url'],
                     url["album_img"].replace("{size}", '100'),
