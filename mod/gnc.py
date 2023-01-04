@@ -6,12 +6,12 @@ from graia.ariadne.entry import (
     MessageChain,
     Image,
     At,
-    Face,
-    Voice
+    Face
 )
 from graia.ariadne.exception import AccountMuted
 from graia.saya import Channel
 from graia.saya.builtins.broadcast.schema import ListenerSchema
+from graia.ariadne.message.element import Xml
 from fun.cache_var import start_time
 from time import time, localtime, strftime
 from fun import get_speed, get_speed_result, get_admin_list, is_admin, mute_time
@@ -68,7 +68,11 @@ async def c(app: Ariadne, group: Group, mem: Member, message: MessageChain):
                 mute_time(int(time()-start_time))
             ))
         elif message.display == 'cs':
-            await app.send_message(group, MessageChain(Voice(path="res/j.amr")))
+            await app.send_message(group, MessageChain(Xml("""
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<msg serviceID="1" templateID="1" action="web" brief="邪少QQXML论坛" sourceMsgId="0" url="https://qun.qq.com/homework/features/v2/index.html?_wv=1027&amp;_bid=3089&amp;#src=2&amp;hw_id=2002159585984144&amp;puin=3241172150&amp;hw_type=0&amp;need_feedback=0&amp;gc=711695859&amp;from=obj" flag="3" adverSign="0" multiMsgFlag="0"><item layout="2" advertiser_id="0" aid="0"><picture cover="https://ae01.alicdn.com/kf/Ue8b39fcb16b440b0be3a43ee4fbfa00dO.png" w="0" h="0" /><title>2月25日作业</title><summary>邪少QQXML论坛</summary></item><source name="邪少QQXML论坛" icon="" action="" appid="-1" /></msg>
+"""
+                                                           )))
         elif message.display == '翻译':
             await app.send_message(group, MessageChain(
                 "[翻译]\n"
@@ -79,6 +83,9 @@ async def c(app: Ariadne, group: Group, mem: Member, message: MessageChain):
                 "语种代码参考↓\n",
                 Image(path="res/lan.png")
             ))
+        elif message.display == '停止' and mem.id == 673457979:
+            await app.send_message(group, MessageChain("注意: 机器已停止运行！但后台未关闭！"))
+            exit(520)
     except AccountMuted:
         await app.send_friend_message(673457979, MessageChain(
             "哦豁，被禁言了",
