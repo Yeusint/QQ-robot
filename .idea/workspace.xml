@@ -5,16 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f5c86858-3124-4447-b709-a8e33c179a63" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/fun/cache_var.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cs.py" beforeDir="false" afterPath="$PROJECT_DIR$/cs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fun/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/fun/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod/fri.py" beforeDir="false" afterPath="$PROJECT_DIR$/mod/fri.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fun/music.py" beforeDir="false" afterPath="$PROJECT_DIR$/fun/music.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mod/gnc.py" beforeDir="false" afterPath="$PROJECT_DIR$/mod/gnc.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mod/music.py" beforeDir="false" afterPath="$PROJECT_DIR$/mod/music.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/v.flac" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/y.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/data.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +31,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2E0hgrAhsZBAMtLB9If03iQrXr8" />
   <component name="ProjectLevelVcsManager">
@@ -51,7 +47,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/res" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -61,6 +57,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\Yeuisnt\mirai-robot\a\res" />
+      <recent name="F:\Yeuisnt\mirai-robot\a" />
       <recent name="F:\Yeuisnt\mirai-robot\res" />
       <recent name="F:\Yeuisnt\mirai-robot" />
     </key>
@@ -70,28 +68,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.main">
-    <configuration name="__init__" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="QQ-robot" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/fun/__init__.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="cgc" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="QQ-robot" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -113,6 +89,48 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="cs (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="QQ-robot" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cs.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="cs" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="QQ-robot" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="F:\Yeuisnt\mirai-robot\cs.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="cs" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="QQ-robot" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -126,7 +144,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cs.py" />
+      <option name="SCRIPT_NAME" value="F:\Yeuisnt\mirai-robot\cs.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -201,26 +219,26 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.cs" />
       <item itemvalue="Python.main" />
-      <item itemvalue="Python.group" />
-      <item itemvalue="Python.__init__" />
-      <item itemvalue="Python.gnc" />
       <item itemvalue="Python.cgc" />
+      <item itemvalue="Python.cs (1)" />
+      <item itemvalue="Python.cs" />
+      <item itemvalue="Python.gnc" />
+      <item itemvalue="Python.group" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.cgc" />
+        <item itemvalue="Python.cs (1)" />
         <item itemvalue="Python.gnc" />
+        <item itemvalue="Python.cgc" />
         <item itemvalue="Python.group" />
-        <item itemvalue="Python.__init__" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="eefc5c7f-2ede-47eb-ab68-7c1920ca1bca" name="Changes" comment="" />
+      <changelist id="f5c86858-3124-4447-b709-a8e33c179a63" name="Changes" comment="update" />
       <created>1661738529029</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -299,7 +317,56 @@
       <option name="project" value="LOCAL" />
       <updated>1672572054988</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="update">
+      <created>1672583141625</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1672583141625</updated>
+    </task>
+    <task id="LOCAL-00012" summary="update">
+      <created>1672583151792</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1672583151792</updated>
+    </task>
+    <task id="LOCAL-00013" summary="update">
+      <created>1672588897893</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1672588897893</updated>
+    </task>
+    <task id="LOCAL-00014" summary="update">
+      <created>1672591539636</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1672591539636</updated>
+    </task>
+    <task id="LOCAL-00015" summary="update">
+      <created>1672647984240</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1672647984240</updated>
+    </task>
+    <task id="LOCAL-00016" summary="update">
+      <created>1672650272864</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1672650272864</updated>
+    </task>
+    <task id="LOCAL-00017" summary="update">
+      <created>1672794778223</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1672794778223</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TerminalProjectNonSharedOptionsProvider">

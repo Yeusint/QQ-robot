@@ -6,14 +6,15 @@ from graia.ariadne.entry import (
     MessageChain,
     Image,
     At,
-    Face
+    Face,
+    Voice
 )
 from graia.ariadne.exception import AccountMuted
 from graia.saya import Channel
 from graia.saya.builtins.broadcast.schema import ListenerSchema
-from graia.ariadne.message.element import Xml
+from aiohttp import ClientSession
 from fun.cache_var import start_time
-from time import time, localtime, strftime
+from time import time, localtime, strftime, sleep
 from fun import get_speed, get_speed_result, get_admin_list, is_admin, mute_time
 c = Channel.current()
 
@@ -21,8 +22,14 @@ c = Channel.current()
 @c.use(ListenerSchema(listening_events=[GroupMessage]))
 async def c(app: Ariadne, group: Group, mem: Member, message: MessageChain):
     try:
-        if message.display == "a":
+        if message.display == "头像":
             await app.send_message(group,MessageChain(Image(url="https://q.qlogo.cn/g?b=qq&nk=" + str(mem.id) + "&s=0")))
+        elif message.display == '菜单':
+            await app.send_message(group, MessageChain("""
+---YSTの机器人---
+头像|点歌
+
+            """))
         elif message.display == "查看机器网络状态" and is_admin(group.id, mem.id):
             await app.send_message(group,MessageChain(At(mem), get_speed_result(get_speed())))
         elif message.display == "获取管理员列表":
@@ -68,11 +75,9 @@ async def c(app: Ariadne, group: Group, mem: Member, message: MessageChain):
                 mute_time(int(time()-start_time))
             ))
         elif message.display == 'cs':
-            await app.send_message(group, MessageChain(Xml("""
-<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
-<msg serviceID="1" templateID="1" action="web" brief="邪少QQXML论坛" sourceMsgId="0" url="https://qun.qq.com/homework/features/v2/index.html?_wv=1027&amp;_bid=3089&amp;#src=2&amp;hw_id=2002159585984144&amp;puin=3241172150&amp;hw_type=0&amp;need_feedback=0&amp;gc=711695859&amp;from=obj" flag="3" adverSign="0" multiMsgFlag="0"><item layout="2" advertiser_id="0" aid="0"><picture cover="https://ae01.alicdn.com/kf/Ue8b39fcb16b440b0be3a43ee4fbfa00dO.png" w="0" h="0" /><title>2月25日作业</title><summary>邪少QQXML论坛</summary></item><source name="邪少QQXML论坛" icon="" action="" appid="-1" /></msg>
-"""
-                                                           )))
+            await app.send_message(group, MessageChain(
+                Voice(url='https://webfs.ali.kugou.com/202301050939/73037efd0b41c7eaf1b7b417ba33b0e9/KGTX/CLTX001/9bba6b8a86c411a74c1c2d14a0a5d0bd.mp3')
+            ))
         elif message.display == '翻译':
             await app.send_message(group, MessageChain(
                 "[翻译]\n"
@@ -86,6 +91,11 @@ async def c(app: Ariadne, group: Group, mem: Member, message: MessageChain):
         elif message.display == '停止' and mem.id == 673457979:
             await app.send_message(group, MessageChain("注意: 机器已停止运行！但后台未关闭！"))
             exit(520)
+        elif message.display == '赞助':
+            await app.send_message(group, MessageChain(At(mem), " 将在20秒后撤回，请迅速扫描哟~", Face(name='小纠结')))
+            k = await app.send_message(group, MessageChain(Image(path="res/pay.jpg")))
+            sleep(20)
+            await app.recall_message(k)
     except AccountMuted:
         await app.send_friend_message(673457979, MessageChain(
             "哦豁，被禁言了",

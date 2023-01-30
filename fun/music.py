@@ -1,16 +1,9 @@
 from hashlib import md5
 from time import time
 from requests import get
-#from json import loads
 
 
-def get_kugou(song_name: str, mode: int,cookie: dict)-> str:
-    """
-    mode_num_explain\n
-    1 find->list\n
-    2 song->dict\n
-    3 song->url\n
-    """
+def get_kugou(song_name: str)-> list:
     _md5 = md5()
     params = [
         "NVPh5oo715z5DIWAeQlhMDsWXXQV4hwt",
@@ -47,9 +40,19 @@ def get_kugou(song_name: str, mode: int,cookie: dict)-> str:
         r += params[i]
         r += '&'
         i += 1
-    f = get(r).json()
-    g = get(
-        f'https://wwwapi.kugou.com/yy/index.php?r=play/getdata&dfid={cookie["dfid"]}&appid=1014&mid={cookie["mid"]}&platid=4&encode_album_audio_id={f["data"]["lists"][0]["EMixSongID"]}&_=1672713853357',
-        cookies=cookie
-    ).json()['data']['play_url']
-    return g
+    return get(r).json()['data']['lists']
+
+def song_data(music_id:str, source: str,cookie:dict=None)-> dict:
+    """
+    :param music_id: id
+    :param source:kugou|qq|nes
+    :param cookie:user_data
+    :return: music_info
+    """
+    if source == "kugou":
+        g = get(
+            f'https://wwwapi.kugou.com/yy/index.php?r=play/getdata&dfid={cookie["dfid"]}&appid=1014&mid={cookie["mid"]}&platid=4&encode_album_audio_id={music_id}&_=1672801556353',
+            cookies=cookie
+        ).json()['data']
+        return g
+    return {}
