@@ -10,12 +10,12 @@ class FuckError(Exception):
 class SUDP:
     def __init__(self, host: str, port: int):
         if len(_:=host.split('.')) != 4:
-            raise ("Invalid host.")
+            raise FuckError("Invalid host.")
         for i in _:
             if not i.isdigit():
-                raise "Invalid host."
+                raise FuckError("Invalid host.")
         if 1 >= port or 25565 <= port:
-            raise 'Invalid port.'
+            raise FuckError('Invalid port.')
         self.sock = socket(AF_INET, SOCK_DGRAM)
         self.addr = (host, port)
         # Command list
@@ -43,31 +43,39 @@ class SUDP:
                 _ = m.find(b'|') + 1
                 if _==0:
                     raise FuckError("Fuck!!!")
-                s, c, m = int.from_bytes(m[:_-1], 'big'), m[_:(_:=_+m[_:].find(b'|'))].decode(), m[_+1:]
+                s = int.from_bytes(bytes.fromhex("0"*(len(m[:_-1])%2)+m[:_-1].decode()), 'big')
+                if m[_:].find(b'|') == -1:
+                    c = m[_:].decode()
+                    m = b''
+                else:
+                    c, m = m[_:(_:=_+m[_:].find(b'|'))].decode(), m[_+1:]
                 if c == 'Back':
                     self.do_mq(int(m), 0, s)
                     return
                 for i in self.c_l[0]:
-                    Thread(target=i, args=(m, a)).start()
+                    Thread(target=i, args=(m, a, s)).start()
                 if c in self.c_l[1]:
                     for i in self.c_l[1][c]:
-                        Thread(target=i, args=(m, a)).start()
+                        Thread(target=i, args=(m, a, s)).start()
             except Exception as e:
                 print(f'Start: {e}')
 
-    def cmd(self, name: str=None):
+    def cmd(self, name: str):
         def wrapper(func):
-            if name:
-                self.c_l[0].append(func)
-            else:
-                try:
-                    self.c_l[1][name].append(func)
-                except KeyError:
-                    self.c_l[1][name] = [func]
+            try:
+                self.c_l[1][name].append(func)
+            except KeyError:
+                self.c_l[1][name] = [func]
             def __call__(*args, **kwargs):
                 print("\033[31mThis function can't call!\033[0m\n\033[34mEnter: {}\033[0m".format(func.__name__))
             return __call__
         return wrapper
+
+    def cmd_global(self, func):
+        self.c_l[0].append(func)
+        def __call__(*args, **kwargs):
+            print("\033[31mThis function can't call!\033[0m\n\033[34mEnter: {}\033[0m".format(func.__name__))
+        return __call__
 
     def do_mq(self, uid: int, mode: Literal[0, 1], s_n: int, data:bytes=None):
         if mode:
@@ -88,7 +96,7 @@ class SUDP:
             self.m_q.pop(u)
             self.u_l.pop(u)
         try:
-            self.sock.sendto(data, self.u_l[uid]['addr'])
+            self.sock.sendto(f'{hex(s_n)[2:]}|'.encode()+data, self.u_l[uid]['addr'])
             self.m_q[uid][s_n] = data
             Thread(target=wait_back, args=(uid, timeout, s_n)).start()
         except Exception as e:
