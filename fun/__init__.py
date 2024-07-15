@@ -6,6 +6,7 @@ from threading import Thread
 from requests import get
 from random import randint
 from graia.ariadne.entry import Image, Group
+from typing import Literal
 
 
 speed_result = {}
@@ -162,24 +163,21 @@ def get_md5(str_):
     return m.hexdigest()
 
 
-def translate(text, language):
-    if language not in loads(open("res/data.json", 'r').read())["language"].split(','):
-        return None
-    else:
-        from_ = 'auto'
-        to = language
-        app_id = '20220312001121848'
-        key = '3ub5oSCnDyVJWDteblZW'
-        salt = str(randint(200000, 900000))
-        url = "https://api.fanyi.baidu.com/api/trans/vip/translate?q=" + text + \
-              "&from=" + from_ + \
-              "&to=" + to + \
-              "&appid=" + app_id + \
-              "&salt=" + salt + \
-              "&sign=" + str(get_md5(app_id + text + salt + key))
-        html = get(url)
-        result = loads(html.text)["trans_result"][0]["dst"]
-        return result
+def translate(text, language: Literal["zh","en","wyw","jp","kor","fra","spa","th","ara","ru","pt","de","it","el","nl","pl","bul","est","dan","fin","cs","rom","slo","swe","hu","cht","vie"]):
+    from_ = 'auto'
+    to = language
+    app_id = '20220312001121848'
+    key = '3ub5oSCnDyVJWDteblZW'
+    salt = str(randint(200000, 900000))
+    url = "https://api.fanyi.baidu.com/api/trans/vip/translate?q=" + text + \
+          "&from=" + from_ + \
+          "&to=" + to + \
+          "&appid=" + app_id + \
+          "&salt=" + salt + \
+          "&sign=" + str(get_md5(app_id + text + salt + key))
+    html = get(url)
+    result = loads(html.text)["trans_result"][0]["dst"]
+    return result
 
 
 def mute_time(times: int) -> str:
@@ -227,3 +225,29 @@ def mute_time(times: int) -> str:
             return "%d天%d时%d秒" % (d,h, times)
         elif h != 0 and m != 0 and d != 0:
             return "%d天%d时%d分%d秒" % (d,h, m, times)
+
+
+def wr_data(mode: Literal[0, 1], *key):
+    """
+    Write or Read data, at res/data.json
+    :param mode: 0-Read data file|1-Write data file
+    :param key: Each key, if mode=1, fill data in the end
+    :return: data
+    """
+    with open('res/data.json', 'r') as f:
+        _ = loads(f.read())
+    try:
+        if mode:
+            for i in key[:-2]:
+                if i not in _:
+                    _[i] = {}
+                _ = _[i]
+            _[key[-2]] = key[-1]
+            return key[-1]
+        else:
+            for i in key[:-2]:
+                _ = _[i]
+            return _
+
+    except KeyError:
+        print('At wr_data: KeyError')

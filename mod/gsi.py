@@ -13,7 +13,7 @@ from graia.ariadne.entry import (
 from graia.ariadne.exception import AccountMuted
 from graia.saya import Channel
 from graia.saya.builtins.broadcast.schema import ListenerSchema
-from fun import add_admin, is_member, del_admin, is_admin, add_node, del_node, mute_time, loads, translate
+from fun import add_admin, is_member, del_admin, is_admin, add_node, del_node, mute_time, is_group
 a = Channel.current()
 
 
@@ -208,6 +208,16 @@ async def a(app: Ariadne, message: MessageChain, mem: Member, group: Group):
             elif message.display[2] == '@' and message.display[3:].split(" ")[0].isdigit() and len(message.display[3:].split(" ")[0]) > 1:
                 await app.kick_member(group, int(message.display[3:message.display.find(' ')].rstrip()), message.display[message.display.find(' ')+1:])
                 await app.send_message(group, MessageChain("已将这位兄弟送走～", Face(name="再见")))
+        elif message.display[:5] == '添加防撤回' and is_admin(group.id, mem.id):
+            if _:= message.display[5:]:
+                if _.isdigit():
+                    if is_group(await app.get_group_list(), group.id):
+                        with open() #Need continue
+                        await app.send_message(group, MessageChain('成功添加防撤回~', Face(307), '\n小心被目标群盯上...'))
+                    else:
+                        await app.send_message(group, MessageChain('哦豁...群号错误或者我还没加入这个群', Face(270)))
+            # Need continue
+
     except AccountMuted:
         await app.send_friend_message(673457979, MessageChain(
             "哦豁，被禁言了",
