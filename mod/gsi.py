@@ -1,3 +1,4 @@
+# 权限指令
 from graia.ariadne.entry import (
     Ariadne,
     MessageChain,
@@ -8,14 +9,12 @@ from graia.ariadne.entry import (
     Group,
     Plain,
     Face,
-    DetectPrefix
 )
 from graia.ariadne.exception import AccountMuted
 from graia.saya import Channel
 from graia.saya.builtins.broadcast.schema import ListenerSchema
 from fun import add_admin, is_member, del_admin, is_admin, add_node, del_node, mute_time, loads, translate
 a = Channel.current()
-a_ = Channel.current()
 
 
 @a.use(ListenerSchema(listening_events=[GroupMessage]))
@@ -223,16 +222,3 @@ async def a(app: Ariadne, message: MessageChain, mem: Member, group: Group):
             mem.name
         ))
     except PermissionError:await app.send_message(group, MessageChain("嘤嘤嘤,俺没权限~", Face(name="doge"), Image(path="res/a7.gif")))
-
-
-@a_.use(ListenerSchema(listening_events=[GroupMessage], decorators=[DetectPrefix("翻译")]))
-async def a(app: Ariadne, g: Group, msg:MessageChain=DetectPrefix("翻译")):
-    if msg.display[:msg.display.find(' ')] in loads(open("res/data.json", 'r').read())["language"].split(','):
-        await app.send_message(g, MessageChain(
-            '原文:',
-            msg.display[msg.display.find(' ')+1:],
-            '\n译文:',
-            translate(msg.display[msg.display.find(' ')+1:], msg.display[:msg.display.find(' ')])
-        ))
-    else:
-        pass
