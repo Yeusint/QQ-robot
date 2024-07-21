@@ -38,4 +38,6 @@ cmake*/
 *.out
 *.app
 cmake-build-debug
-.idea
+
+cs.py
+data.txt

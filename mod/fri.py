@@ -1,3 +1,4 @@
+# 私聊消息
 from graia.ariadne.entry import Friend, Ariadne, MessageChain, FriendMessage
 from graia.saya import Channel
 from graia.saya.builtins.broadcast.schema import ListenerSchema

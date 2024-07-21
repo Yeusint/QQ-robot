@@ -1,3 +1,4 @@
+# 点歌系统
 from graia.ariadne.message.element import MusicShareKind
 from graia.ariadne.entry import (
     Ariadne,

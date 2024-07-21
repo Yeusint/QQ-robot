@@ -227,27 +227,16 @@ def mute_time(times: int) -> str:
             return "%d天%d时%d分%d秒" % (d,h, m, times)
 
 
-def wr_data(mode: Literal[0, 1], *key):
+def wr_data(mode: Literal[0, 1], data: dict=None):
     """
     Write or Read data, at res/data.json
     :param mode: 0-Read data file|1-Write data file
-    :param key: Each key, if mode=1, fill data in the end
-    :return: data
+    :param data: Data context
     """
-    with open('res/data.json', 'r') as f:
-        _ = loads(f.read())
-    try:
-        if mode:
-            for i in key[:-2]:
-                if i not in _:
-                    _[i] = {}
-                _ = _[i]
-            _[key[-2]] = key[-1]
-            return key[-1]
-        else:
-            for i in key[:-2]:
-                _ = _[i]
-            return _
+    if mode:
+        with open('res/data.json', 'r') as f:
+            return loads(f.read())
+    else:
+        with open('res/data.json', 'w') as f:
+            return f.write(dumps(data))
 
-    except KeyError:
-        print('At wr_data: KeyError')

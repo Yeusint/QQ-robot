@@ -1,3 +1,4 @@
+# 跨群消息
 from graia.ariadne.exception import AccountMuted, UnknownTarget
 from graia.saya import Channel
 from graia.saya.builtins.broadcast.schema import ListenerSchema

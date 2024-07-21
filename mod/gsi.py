@@ -13,7 +13,8 @@ from graia.ariadne.entry import (
 from graia.ariadne.exception import AccountMuted
 from graia.saya import Channel
 from graia.saya.builtins.broadcast.schema import ListenerSchema
-from fun import add_admin, is_member, del_admin, is_admin, add_node, del_node, mute_time, is_group
+from fun import add_admin, is_member, del_admin, is_admin, add_node, del_node, mute_time, is_group, wr_data
+from json import loads, dumps
 a = Channel.current()
 
 
@@ -211,12 +212,18 @@ async def a(app: Ariadne, message: MessageChain, mem: Member, group: Group):
         elif message.display[:5] == '添加防撤回' and is_admin(group.id, mem.id):
             if _:= message.display[5:]:
                 if _.isdigit():
-                    if is_group(await app.get_group_list(), group.id):
-                        with open() #Need continue
+                    if is_group(await app.get_group_list(), int(_)):
+                        data = wr_data(0)
+                        data['recall'].append(int(_))
+                        wr_data(1, data)
                         await app.send_message(group, MessageChain('成功添加防撤回~', Face(307), '\n小心被目标群盯上...'))
                     else:
                         await app.send_message(group, MessageChain('哦豁...群号错误或者我还没加入这个群', Face(270)))
-            # Need continue
+            else:
+                data = wr_data(0)
+                data['recall'].append(group.id)
+                wr_data(1, data)
+                await app.send_message(group, MessageChain('成功为本群添加防撤回~', Face(307), '\n小心被群员打死...'))
 
     except AccountMuted:
         await app.send_friend_message(673457979, MessageChain(
